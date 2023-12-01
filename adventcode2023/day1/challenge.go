@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"strconv"
 
+	"alex952.com/advent2023/adventcode2023/shared"
 	"github.com/sirupsen/logrus"
 )
 
@@ -191,19 +192,10 @@ func ReadCalibrationLine(line string) *CalibrationInput {
 }
 
 type Day1Runner struct {
-	Input string
 }
 
-func (d *Day1Runner) GetInputFilename() string {
-	return d.Input
-}
-
-func (d *Day1Runner) SetInputFilename(filename string) {
-	d.Input = filename
-}
-
-func (d *Day1Runner) RunChallenge(first bool) (string, error) {
-	f, err := os.Open(d.GetInputFilename())
+func (d *Day1Runner) RunChallenge(config shared.AdventOfCodeChallengRunnerConfig) (string, error) {
+	f, err := os.Open(config.Filename)
 	if err != nil {
 		fmt.Println("Cannot open file")
 		return "", errors.New("Couldn't run the challenge. Can't open the file")
@@ -218,14 +210,14 @@ func (d *Day1Runner) RunChallenge(first bool) (string, error) {
 	}
 
 	for _, e := range calibration_data {
-		if first {
+		if config.First {
 			logrus.Debug(e.FirstPartCalibrationNumber())
 		} else {
 			logrus.Debug(e.CalibrationNumber())
 		}
 	}
 
-	if first {
+	if config.First {
 		return fmt.Sprintf("Total calibration number is %d\n", FirstPartTotalCalibration(calibration_data)), nil
 	} else {
 		return fmt.Sprintf("Total calibration number is %d\n", TotalCalibration(calibration_data)), nil

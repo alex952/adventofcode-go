@@ -4,16 +4,15 @@ import (
 	"errors"
 
 	"alex952.com/advent2023/adventcode2023/day1"
+	"alex952.com/advent2023/adventcode2023/shared"
 )
 
 type AdventOfCodeChallengRunner interface {
-	GetInputFilename() string
-	SetInputFilename(filename string)
-	RunChallenge(first bool) (string, error)
+	RunChallenge(config shared.AdventOfCodeChallengRunnerConfig) (string, error)
 }
 
 var DayChallengesRunners = map[int]AdventOfCodeChallengRunner{
-	1: &day1.Day1Runner{Input: "./adventcode2023/day1/input.txt"},
+	1: &day1.Day1Runner{},
 }
 
 func MakeChallengeRunner(day int) (AdventOfCodeChallengRunner, error) {
