@@ -186,18 +186,8 @@ func TotalCalibration(inputs []*CalibrationInput) int {
 	return sum
 }
 
-func ReadCalibrationLines(file *os.File) []*CalibrationInput {
-
-	ret := []*CalibrationInput{}
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		t := scanner.Text()
-
-		ret = append(ret, &CalibrationInput{calibrationValues: []byte(t)})
-	}
-
-	return ret
+func ReadCalibrationLine(line string) *CalibrationInput {
+	return &CalibrationInput{calibrationValues: []byte(line)}
 }
 
 type Day1Runner struct {
@@ -219,9 +209,15 @@ func (d *Day1Runner) RunChallenge(first bool) (string, error) {
 		return "", errors.New("Couldn't run the challenge. Can't open the file")
 	}
 
-	test_calibration := ReadCalibrationLines(f)
+	calibration_data := []*CalibrationInput{}
+	scanner := bufio.NewScanner(f)
 
-	for _, e := range test_calibration {
+	for scanner.Scan() {
+		t := scanner.Text()
+		calibration_data = append(calibration_data, ReadCalibrationLine(t))
+	}
+
+	for _, e := range calibration_data {
 		if first {
 			logrus.Debug(e.FirstPartCalibrationNumber())
 		} else {
@@ -230,8 +226,8 @@ func (d *Day1Runner) RunChallenge(first bool) (string, error) {
 	}
 
 	if first {
-		return fmt.Sprintf("Total calibration number is %d\n", FirstPartTotalCalibration(test_calibration)), nil
+		return fmt.Sprintf("Total calibration number is %d\n", FirstPartTotalCalibration(calibration_data)), nil
 	} else {
-		return fmt.Sprintf("Total calibration number is %d\n", TotalCalibration(test_calibration)), nil
+		return fmt.Sprintf("Total calibration number is %d\n", TotalCalibration(calibration_data)), nil
 	}
 }
