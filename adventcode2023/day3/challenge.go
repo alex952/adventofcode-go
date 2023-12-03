@@ -68,7 +68,7 @@ func RunPart1(data map[int]*PartsData) string {
 							"Line":   d.Line,
 							"Number": number,
 							"Symbol": string(s),
-						}).Info("Number Adjacent to Symbol")
+						}).Debug("Number Adjacent to Symbol")
 						break targets
 					}
 				}
@@ -130,7 +130,7 @@ func RunPart2(data map[int]*PartsData) string {
 							"Line":   d.Line,
 							"Number": number,
 							"Symbol": string(s),
-						}).Info("Number Adjacent to Symbol")
+						}).Debug("Number Adjacent to Symbol")
 
 						coor := SymbolCoordinates{Line: t.LineNumber, Index: i}
 
@@ -185,7 +185,7 @@ func (runner *Day3Runner) RunChallenge(config shared.AdventOfCodeChallengRunnerC
 			"Line":           line,
 			"NumbersIndices": line_parts_data.Numbers,
 			"SymbolsIndices": line_parts_data.Symbols,
-		}).Info("Read line data")
+		}).Debug("Read line data")
 
 		fmt.Println(line_parts_data.PrintInfo())
 
