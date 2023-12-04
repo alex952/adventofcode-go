@@ -64,14 +64,6 @@ func (s *ScratchCard) CalculateWinningScore() float64 {
 	return winning
 }
 
-func min(x int, y int) int {
-	if x < y {
-		return x
-	} else {
-		return y
-	}
-}
-
 func RunPart1(data []*ScratchCard) string {
 	sum := 0.0
 	for _, v := range data {
@@ -86,7 +78,7 @@ func RunPart2(data []*ScratchCard) string {
 
 	for idx := 0; idx < len(new_slice); idx = idx + 1 {
 		if len(new_slice[idx].WinningNumbers) > 0 {
-			new_slice = append(new_slice, data[new_slice[idx].Id:min(len(data), new_slice[idx].Id+len(new_slice[idx].WinningNumbers))]...)
+			new_slice = append(new_slice, data[new_slice[idx].Id:shared.Min(len(data), new_slice[idx].Id+len(new_slice[idx].WinningNumbers))]...)
 		}
 	}
 
