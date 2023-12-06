@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"alex952.com/advent2023/adventcode2023/shared"
+	"github.com/sirupsen/logrus"
 )
 
 type RaceData struct {
@@ -47,7 +48,12 @@ func ReadRacesPart1(scanner *bufio.Scanner) Races {
 	for i := 0; i < len(times); i += 1 {
 		d_int, _ := strconv.Atoi(distances[i])
 		t_int, _ := strconv.Atoi(times[i])
-		ret = append(ret, RaceData{Time: t_int, Distance: d_int})
+		race := RaceData{Time: t_int, Distance: d_int}
+		logrus.WithFields(logrus.Fields{
+			"Time":     race.Time,
+			"Distance": race.Distance,
+		}).Debug("Race Data Loaded")
+		ret = append(ret, race)
 	}
 
 	return ret
@@ -70,7 +76,12 @@ func ReadRacesPart2(scanner *bufio.Scanner) Races {
 	for i := 0; i < len(times); i += 1 {
 		d_int, _ := strconv.Atoi(distances[i])
 		t_int, _ := strconv.Atoi(times[i])
-		ret = append(ret, RaceData{Time: t_int, Distance: d_int})
+		race := RaceData{Time: t_int, Distance: d_int}
+		logrus.WithFields(logrus.Fields{
+			"Time":     race.Time,
+			"Distance": race.Distance,
+		}).Debug("Race Data Loaded")
+		ret = append(ret, race)
 	}
 
 	return ret
