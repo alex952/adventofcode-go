@@ -17,8 +17,10 @@ type MapItem struct {
 	length int
 }
 
-type Map []MapItem
-type TranslationMaps map[string]Map
+type (
+	Map             []MapItem
+	TranslationMaps map[string]Map
+)
 
 type PlantData struct {
 	seeds []int
@@ -129,7 +131,7 @@ func (runner *Day5Runner) RunChallenge(config shared.AdventOfCodeChallengRunnerC
 	f, err := os.Open(config.Filename)
 	if err != nil {
 		fmt.Println("Cannot open file")
-		return "", errors.New("Couldn't run the challenge. Can't open the file")
+		return "", errors.New("couldn't run the challenge. Can't open the file")
 	}
 
 	scanner := bufio.NewScanner(f)
