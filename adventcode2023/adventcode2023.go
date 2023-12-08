@@ -10,6 +10,7 @@ import (
 	"alex952.com/advent2023/adventcode2023/day5"
 	"alex952.com/advent2023/adventcode2023/day6"
 	"alex952.com/advent2023/adventcode2023/day7"
+	"alex952.com/advent2023/adventcode2023/day8"
 	"alex952.com/advent2023/adventcode2023/shared"
 )
 
@@ -25,6 +26,7 @@ var DayChallengesRunners = map[int]AdventOfCodeChallengRunner{
 	5: &day5.Day5Runner{},
 	6: &day6.Day6Runner{},
 	7: &day7.Day7Runner{},
+	8: &day8.Day8Runner{},
 }
 
 func MakeChallengeRunner(day int) (AdventOfCodeChallengRunner, error) {
